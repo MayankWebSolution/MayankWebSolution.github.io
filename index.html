@@ -1,0 +1,2121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mayank Web Solution — Shopify, WordPress & App Developer</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --ink: #080c11;
+        --ink2: #0e1420;
+        --ink3: #141c28;
+        --surface: #1a2333;
+        --border: rgba(255, 255, 255, 0.07);
+        --gold: #c9a84c;
+        --gold2: #e8c97a;
+        --gold-dim: rgba(201, 168, 76, 0.12);
+        --gold-bd: rgba(201, 168, 76, 0.26);
+        --text: #dfe4ed;
+        --muted: #6b7a8d;
+        --muted2: #98a8b8;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--ink);
+        color: var(--text);
+        overflow-x: hidden;
+        line-height: 1.65;
+      }
+
+      /* grain overlay */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9000;
+        opacity: 0.4;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+        background-size: 128px;
+      }
+
+      /* ambient light */
+      .amb {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .a1 {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(201, 168, 76, 0.06),
+          transparent 68%
+        );
+        top: -250px;
+        left: -250px;
+        animation: slow 22s ease-in-out infinite alternate;
+      }
+      .a2 {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(80, 130, 220, 0.05),
+          transparent 68%
+        );
+        bottom: -200px;
+        right: -150px;
+        animation: slow 28s ease-in-out infinite alternate-reverse;
+      }
+      @keyframes slow {
+        from {
+          transform: translate(0, 0);
+        }
+        to {
+          transform: translate(50px, 35px);
+        }
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.2rem 0;
+        background: rgba(8, 12, 16, 0.8);
+        backdrop-filter: blur(24px) saturate(160%);
+        border-bottom: 1px solid var(--border);
+        z-index: 1000;
+        transition: padding 0.3s;
+      }
+      nav.scrolled {
+        padding: 0.8rem 0;
+      }
+      .nw {
+        max-width: 1260px;
+        margin: 0 auto;
+        padding: 0 2.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo img {
+        height: 38px;
+        width: auto;
+        display: block;
+      }
+      .nl {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nl a {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nl a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--gold);
+        transition: width 0.3s;
+      }
+      .nl a:hover {
+        color: var(--gold);
+      }
+      .nl a:hover::after {
+        width: 100%;
+      }
+      .hbg {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+      }
+      .hbg span {
+        width: 22px;
+        height: 2px;
+        background: var(--gold);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+      .hbg.op span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .hbg.op span:nth-child(2) {
+        opacity: 0;
+      }
+      .hbg.op span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      /* ── HERO ── */
+      .hero {
+        position: relative;
+        z-index: 1;
+        min-height: calc(100vh - 62px);
+        display: flex;
+        align-items: center;
+        padding: 6rem 2.5rem 5rem;
+      }
+      .hw {
+        max-width: 1260px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 5rem;
+        align-items: center;
+      }
+
+      .eb {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.42rem 1rem;
+        border: 1px solid var(--gold-bd);
+        border-radius: 100px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--gold);
+        text-transform: uppercase;
+        letter-spacing: 0.11em;
+        margin-bottom: 2rem;
+        background: var(--gold-dim);
+      }
+      .ed {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 8px var(--gold);
+        animation: bl 2s ease-in-out infinite;
+      }
+      @keyframes bl {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.8rem, 4.8vw, 4.8rem);
+        font-weight: 900;
+        line-height: 1.07;
+        letter-spacing: -0.035em;
+        margin-bottom: 0.6rem;
+      }
+      h1 i {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .role {
+        font-size: 0.92rem;
+        font-weight: 500;
+        color: var(--muted2);
+        letter-spacing: 0.04em;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+      }
+      .hdesc {
+        font-size: 0.95rem;
+        color: var(--muted2);
+        line-height: 1.9;
+        max-width: 500px;
+        margin-bottom: 2.2rem;
+        font-weight: 300;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+      }
+      .chip {
+        padding: 0.35rem 0.82rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--muted2);
+        background: var(--surface);
+        transition: all 0.25s;
+      }
+      .chip:hover {
+        border-color: var(--gold-bd);
+        color: var(--gold);
+      }
+
+      .brow {
+        display: flex;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.82rem 1.75rem;
+        border-radius: 8px;
+        font-size: 0.87rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+      }
+      .bp {
+        background: var(--gold);
+        color: #080c11;
+        box-shadow: 0 8px 26px rgba(201, 168, 76, 0.32);
+      }
+      .bp:hover {
+        background: var(--gold2);
+        transform: translateY(-3px);
+        box-shadow: 0 14px 34px rgba(201, 168, 76, 0.42);
+      }
+      .bo {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .bo:hover {
+        border-color: var(--gold-bd);
+        color: var(--gold);
+        transform: translateY(-3px);
+      }
+
+      /* hero card */
+      .hcard {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hcard::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(201, 168, 76, 0.04),
+          transparent 55%
+        );
+        pointer-events: none;
+      }
+      .krow {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+        margin-bottom: 1.6rem;
+      }
+      .kbox {
+        text-align: center;
+        padding: 1.1rem 0.6rem;
+        background: var(--ink2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+      }
+      .knum {
+        font-family: "Playfair Display", serif;
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: var(--gold);
+        display: block;
+        line-height: 1;
+      }
+      .klbl {
+        font-size: 0.68rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 0.3rem;
+        display: block;
+      }
+      .dv {
+        height: 1px;
+        background: var(--border);
+        margin: 1.4rem 0;
+      }
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .pill {
+        padding: 0.27rem 0.7rem;
+        border-radius: 5px;
+        font-size: 0.74rem;
+        font-weight: 600;
+        background: var(--gold-dim);
+        border: 1px solid var(--gold-bd);
+        color: var(--gold);
+      }
+
+      /* ── SECTIONS ── */
+      section {
+        position: relative;
+        z-index: 1;
+        padding: 5.5rem 2.5rem;
+      }
+      .w {
+        max-width: 1260px;
+        margin: 0 auto;
+      }
+      .sl {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--gold);
+        display: block;
+        margin-bottom: 0.65rem;
+      }
+      h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        line-height: 1.12;
+        margin-bottom: 0.9rem;
+      }
+      h2 em {
+        font-style: italic;
+        color: var(--gold);
+      }
+      .sd {
+        font-size: 0.92rem;
+        color: var(--muted2);
+        max-width: 560px;
+        line-height: 1.82;
+        font-weight: 300;
+      }
+      .sh {
+        margin-bottom: 3rem;
+      }
+      .bg2 {
+        background: var(--ink2);
+      }
+
+      /* ── SKILLS ── */
+      .sgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+        gap: 1.3rem;
+      }
+      .sc {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.7rem;
+        transition: all 0.35s;
+        position: relative;
+        overflow: hidden;
+      }
+      .sc::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        background: linear-gradient(180deg, var(--gold), transparent);
+        transition: width 0.4s;
+        border-radius: 4px;
+      }
+      .sc:hover {
+        border-color: var(--gold-bd);
+        transform: translateY(-6px);
+        box-shadow: 0 14px 44px rgba(201, 168, 76, 0.1);
+      }
+      .sc:hover::before {
+        width: 3px;
+      }
+      .si {
+        font-size: 1.5rem;
+        color: var(--gold);
+        margin-bottom: 0.9rem;
+      }
+      .sc h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+      }
+      .tl {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.38rem;
+      }
+      .st {
+        padding: 0.26rem 0.66rem;
+        border-radius: 5px;
+        font-size: 0.76rem;
+        font-weight: 400;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        color: var(--muted2);
+      }
+
+      /* ── WORK / BRAND LIST ── */
+      .section-work {
+        background: var(--ink);
+      }
+      .bhead {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2.2rem;
+      }
+      .bcnt {
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      .bcnt b {
+        color: var(--gold);
+      }
+
+      /* table */
+      .btable {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .bth {
+        display: grid;
+        grid-template-columns: 2.2fr 1.2fr 1.8fr 90px;
+        gap: 1.2rem;
+        padding: 0.8rem 1.6rem;
+        background: var(--ink3);
+        border-bottom: 1px solid var(--border);
+      }
+      .bth span {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.11em;
+        color: var(--muted);
+      }
+      .br {
+        display: grid;
+        grid-template-columns: 2.2fr 1.2fr 1.8fr 90px;
+        gap: 1.2rem;
+        align-items: center;
+        padding: 1rem 1.6rem;
+        border-bottom: 1px solid var(--border);
+        text-decoration: none;
+        color: inherit;
+        transition: background 0.2s;
+      }
+      .br:last-child {
+        border-bottom: none;
+      }
+      .br:hover {
+        background: rgba(201, 168, 76, 0.04);
+      }
+      .br:hover .bn {
+        color: var(--gold);
+      }
+      .bn {
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        transition: color 0.25s;
+        color: var(--text);
+      }
+      .vi {
+        font-size: 0.78rem;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.28rem;
+        padding: 0.16rem 0.5rem;
+        border-radius: 4px;
+        background: rgba(201, 168, 76, 0.13);
+        border: 1px solid var(--gold-bd);
+        color: var(--gold);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .bt-type {
+        font-size: 0.8rem;
+        color: var(--muted2);
+      }
+      .btags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.32rem;
+      }
+      .btt {
+        padding: 0.2rem 0.58rem;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        color: var(--muted2);
+      }
+      .btt.sp {
+        background: rgba(150, 229, 130, 0.09);
+        border-color: rgba(150, 229, 130, 0.23);
+        color: #7fd46a;
+      }
+      .btt.wp {
+        background: rgba(33, 161, 209, 0.09);
+        border-color: rgba(33, 161, 209, 0.23);
+        color: #45b7d8;
+      }
+      .blink {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--muted);
+        transition: color 0.25s;
+        white-space: nowrap;
+      }
+      .br:hover .blink {
+        color: var(--gold);
+      }
+
+      /* personal projects */
+      .pp {
+        margin-top: 2.5rem;
+      }
+      .ppl {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        margin-bottom: 1.2rem;
+        display: block;
+      }
+      .ppg {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+        gap: 1.1rem;
+      }
+      .ppc {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s;
+      }
+      .ppc:hover {
+        border-color: var(--gold-bd);
+        transform: translateY(-4px);
+      }
+      .ppc h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      .ppc p {
+        font-size: 0.82rem;
+        color: var(--muted2);
+        line-height: 1.72;
+        margin-bottom: 0.9rem;
+        font-weight: 300;
+      }
+      .ptags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+      }
+      .ptag {
+        padding: 0.22rem 0.62rem;
+        border-radius: 4px;
+        font-size: 0.73rem;
+        font-weight: 600;
+        background: var(--gold-dim);
+        border: 1px solid var(--gold-bd);
+        color: var(--gold);
+      }
+
+      /* ── ABOUT ── */
+      .ag {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: start;
+      }
+      .alt h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.55rem;
+        font-weight: 700;
+        line-height: 1.3;
+        margin-bottom: 1.1rem;
+      }
+      .alt p {
+        font-size: 0.9rem;
+        color: var(--muted2);
+        line-height: 1.85;
+        margin-bottom: 0.9rem;
+        font-weight: 300;
+      }
+      .hl {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .edu {
+        margin-top: 1.8rem;
+        padding: 1.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--gold);
+        border-radius: 12px;
+      }
+      .edu h4 {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.11em;
+        color: var(--gold);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .edu p {
+        font-size: 0.85rem;
+        color: var(--muted2);
+        margin-bottom: 0.28rem;
+        font-weight: 300;
+      }
+      .edu strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .cert {
+        margin-top: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 1.1rem;
+        border: 1px solid var(--gold-bd);
+        border-radius: 7px;
+        background: var(--gold-dim);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--gold);
+      }
+
+      .el {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .ec {
+        padding: 1.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s;
+      }
+      .ec:hover {
+        border-color: var(--gold-bd);
+      }
+      .ec::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(
+          180deg,
+          var(--gold),
+          rgba(201, 168, 76, 0.2)
+        );
+      }
+      .edate {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--gold);
+        margin-bottom: 0.38rem;
+      }
+      .etitle {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+      }
+      .eco {
+        font-size: 0.8rem;
+        color: var(--muted2);
+        margin-bottom: 0.7rem;
+      }
+      .eul {
+        list-style: none;
+      }
+      .eul li {
+        font-size: 0.82rem;
+        color: var(--muted2);
+        padding-left: 1.1rem;
+        position: relative;
+        margin-bottom: 0.28rem;
+        line-height: 1.62;
+        font-weight: 300;
+      }
+      .eul li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        font-size: 0.8rem;
+      }
+
+      /* ── CONTACT ── */
+      .cg {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: start;
+      }
+      .ci h2 {
+        text-align: left;
+        margin-bottom: 0.9rem;
+      }
+      .ci .sd {
+        margin-top: 0;
+        margin-bottom: 1.8rem;
+        max-width: 100%;
+      }
+      .citems {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .citem {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        padding: 1.2rem 1.4rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 11px;
+        transition: all 0.3s;
+      }
+      .citem:hover {
+        border-color: var(--gold-bd);
+        transform: translateX(5px);
+      }
+      .cico {
+        width: 40px;
+        height: 40px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, var(--gold), #9a7228);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: #080c11;
+        flex-shrink: 0;
+      }
+      .clbl {
+        font-size: 0.67rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        margin-bottom: 0.2rem;
+      }
+      .cval {
+        font-size: 0.92rem;
+        font-weight: 600;
+      }
+      .cval a {
+        color: var(--text);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .cval a:hover {
+        color: var(--gold);
+      }
+      .socs {
+        display: flex;
+        gap: 0.65rem;
+        margin-top: 1.8rem;
+        flex-wrap: wrap;
+      }
+      .soc {
+        width: 42px;
+        height: 42px;
+        border-radius: 9px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted2);
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .soc:hover {
+        background: var(--gold);
+        color: #080c11;
+        border-color: var(--gold);
+        transform: translateY(-3px);
+      }
+
+      .cpanel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+      }
+      .avail {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.3rem;
+        background: rgba(201, 168, 76, 0.08);
+        border: 1px solid var(--gold-bd);
+        border-radius: 9px;
+      }
+      .adot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 9px var(--gold);
+        animation: bl 2s infinite;
+        flex-shrink: 0;
+      }
+      .atext {
+        font-size: 0.84rem;
+        font-weight: 500;
+        color: var(--text);
+      }
+      .kgrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+      }
+      .km {
+        text-align: center;
+        padding: 0.95rem 0.7rem;
+        background: var(--ink2);
+        border: 1px solid var(--border);
+        border-radius: 9px;
+      }
+      .km .n {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--gold);
+        display: block;
+        line-height: 1;
+      }
+      .km .l {
+        font-size: 0.67rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-top: 0.28rem;
+        display: block;
+      }
+      .hbtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.95rem;
+        border-radius: 9px;
+        font-weight: 700;
+        font-size: 0.87rem;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .hbtn.em {
+        background: var(--gold);
+        color: #080c11;
+      }
+      .hbtn.em:hover {
+        background: var(--gold2);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(201, 168, 76, 0.33);
+      }
+      .hbtn.wa {
+        background: rgba(37, 211, 102, 0.12);
+        color: #25d366;
+        border: 1px solid rgba(37, 211, 102, 0.28);
+      }
+      .hbtn.wa:hover {
+        background: rgba(37, 211, 102, 0.2);
+        transform: translateY(-2px);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        position: relative;
+        z-index: 1;
+        padding: 1.8rem 2.5rem;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        background: var(--ink);
+      }
+      footer p {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      footer span {
+        color: var(--gold);
+      }
+
+      /* float wa */
+      .fwa {
+        position: fixed;
+        bottom: 26px;
+        right: 26px;
+        z-index: 800;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: #25d366;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.45rem;
+        text-decoration: none;
+        box-shadow: 0 8px 26px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s;
+      }
+      .fwa:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 34px rgba(37, 211, 102, 0.5);
+      }
+
+      /* reveal */
+      .rv {
+        opacity: 0;
+        transform: translateY(22px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease;
+      }
+      .rv.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 1024px) {
+        .hw,
+        .ag,
+        .cg {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .bth,
+        .br {
+          grid-template-columns: 2fr 1fr auto;
+        }
+        .bt-type {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .hbg {
+          display: flex;
+        }
+        .nl {
+          position: fixed;
+          top: 60px;
+          left: -100%;
+          width: 100%;
+          background: rgba(8, 12, 17, 0.97);
+          backdrop-filter: blur(20px);
+          flex-direction: column;
+          gap: 0;
+          padding: 1.5rem 2rem;
+          border-bottom: 1px solid var(--border);
+          transition: left 0.3s;
+          z-index: 499;
+        }
+        .nl.op {
+          left: 0;
+        }
+        .nl li {
+          padding: 0.8rem 0;
+          border-bottom: 1px solid var(--border);
+        }
+        .nl li:last-child {
+          border-bottom: none;
+        }
+        section {
+          padding: 4rem 1.5rem;
+        }
+        .hero {
+          padding: 6rem 1.5rem 4rem;
+        }
+        .brow {
+          flex-direction: column;
+        }
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .bth {
+          display: none;
+        }
+        .br {
+          grid-template-columns: 1fr auto;
+          gap: 0.7rem;
+        }
+        .btags {
+          display: none;
+        }
+        .sgrid,
+        .ppg {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        h2 {
+          font-size: 2rem;
+        }
+        .krow {
+          gap: 0.5rem;
+        }
+        .knum {
+          font-size: 1.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="amb">
+      <div class="a1"></div>
+      <div class="a2"></div>
+    </div>
+
+    <!-- NAV -->
+    <nav id="nav">
+      <div class="nw">
+        <div class="logo">
+          <img src="M-logo.png" alt="Mayank Web Solution" />
+        </div>
+        <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
+        <ul class="nl" id="nl">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="home">
+      <div class="hw">
+        <div>
+          <div class="eb"><span class="ed"></span>Available for Hire</div>
+          <h1>Mayank Web<br /><i>Solution</i></h1>
+          <p class="role">
+            D2C eCommerce &nbsp;·&nbsp; CRO Specialist &nbsp;·&nbsp; App
+            Development
+          </p>
+          <p class="hdesc">
+            Building high-converting D2C storefronts and mobile apps from
+            scratch — custom Shopify Liquid themes, WooCommerce solutions, React
+            Native apps, and CRO strategies that measurably lift conversions.
+            Based in Noida, India.
+          </p>
+          <div class="chips">
+            <span class="chip">Shopify Liquid</span>
+            <span class="chip">WordPress</span>
+            <span class="chip">WooCommerce</span>
+            <span class="chip">React Native</span>
+            <span class="chip">React.js</span>
+            <span class="chip">Node.js</span>
+            <span class="chip">CRO</span>
+            <span class="chip">SEO</span>
+          </div>
+          <div class="brow">
+            <a href="#work" class="btn bp"
+              >View My Work <i class="fas fa-arrow-down"></i
+            ></a>
+            <a href="#contact" class="btn bo"
+              >Get In Touch <i class="fas fa-comment-dots"></i
+            ></a>
+          </div>
+        </div>
+        <div>
+          <div class="hcard">
+            <div class="krow">
+              <div class="kbox">
+                <span class="knum">12+</span
+                ><span class="klbl">Live Stores</span>
+              </div>
+              <div class="kbox">
+                <span class="knum">1+</span><span class="klbl">Yr Exp</span>
+              </div>
+              <div class="kbox">
+                <span class="knum">30%</span
+                ><span class="klbl">Speed Lift</span>
+              </div>
+            </div>
+            <div class="dv"></div>
+            <div class="pills">
+              <span class="pill">Shopify</span><span class="pill">Liquid</span
+              ><span class="pill">WordPress</span>
+              <span class="pill">React Native</span
+              ><span class="pill">React.js</span
+              ><span class="pill">Node.js</span><span class="pill">CRO</span>
+              <span class="pill">SEO</span><span class="pill">Razorpay</span
+              ><span class="pill">Shiprocket</span>
+            </div>
+            <div class="dv"></div>
+            <p
+              style="
+                font-size: 0.82rem;
+                color: var(--muted2);
+                line-height: 1.85;
+                font-weight: 300;
+              "
+            >
+              End-to-end client delivery — requirement gathering → wireframes →
+              revisions → go-live → post-launch CRO. One brand featured in
+              <span style="color: var(--gold); font-weight: 700">Vogue</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SKILLS ═══ -->
+    <section id="skills" class="bg2">
+      <div class="w">
+        <div class="sh rv">
+          <span class="sl">Expertise</span>
+          <h2>Skills &amp; <em>Technologies</em></h2>
+          <p class="sd">
+            A battle-tested toolkit for modern, fast, conversion-focused
+            eCommerce platforms.
+          </p>
+        </div>
+        <div class="sgrid">
+          <div class="sc rv">
+            <div class="si"><i class="fab fa-shopify"></i></div>
+            <h3>Shopify Development</h3>
+            <div class="tl">
+              <span class="st">Liquid</span
+              ><span class="st">Shopify from Scratch</span
+              ><span class="st">App Integration</span
+              ><span class="st">Storefront Customization</span
+              ><span class="st">Sections &amp; Blocks</span>
+            </div>
+          </div>
+          <div class="sc rv">
+            <div class="si"><i class="fas fa-chart-line"></i></div>
+            <h3>CRO &amp; eCommerce</h3>
+            <div class="tl">
+              <span class="st">Conversion Rate Opt.</span
+              ><span class="st">D2C Brand Stores</span
+              ><span class="st">Landing Page Opt.</span
+              ><span class="st">Cart &amp; Checkout UX</span
+              ><span class="st">Razorpay &amp; Shiprocket</span>
+            </div>
+          </div>
+          <div class="sc rv">
+            <div class="si"><i class="fab fa-wordpress"></i></div>
+            <h3>WordPress &amp; WooCommerce</h3>
+            <div class="tl">
+              <span class="st">Theme Development</span
+              ><span class="st">Plugin Customization</span
+              ><span class="st">WooCommerce</span
+              ><span class="st">Custom Post Types</span
+              ><span class="st">On-page SEO</span
+              ><span class="st">Elementor</span>
+            </div>
+          </div>
+          <div class="sc rv">
+            <div class="si"><i class="fas fa-code"></i></div>
+            <h3>Frontend</h3>
+            <div class="tl">
+              <span class="st">HTML5</span><span class="st">CSS3</span
+              ><span class="st">JavaScript</span><span class="st">React.js</span
+              ><span class="st">Bootstrap</span
+              ><span class="st">Responsive Design</span
+              ><span class="st">Cross-Browser</span>
+            </div>
+          </div>
+          <div class="sc rv">
+            <div class="si"><i class="fas fa-server"></i></div>
+            <h3>Backend &amp; Tools</h3>
+            <div class="tl">
+              <span class="st">Node.js</span><span class="st">Express.js</span
+              ><span class="st">MongoDB</span><span class="st">REST APIs</span
+              ><span class="st">SQL</span
+              ><span class="st">Git &amp; GitHub</span
+              ><span class="st">cPanel</span>
+            </div>
+          </div>
+          <div class="sc rv">
+            <div class="si"><i class="fas fa-gauge-high"></i></div>
+            <h3>Performance &amp; SEO</h3>
+            <div class="tl">
+              <span class="st">Page Speed Optimization</span
+              ><span class="st">Lazy Loading</span
+              ><span class="st">Code Splitting</span
+              ><span class="st">Core Web Vitals</span
+              ><span class="st">On-page SEO</span>
+            </div>
+          </div>
+          <div class="sc rv">
+            <div class="si"><i class="fas fa-mobile-screen"></i></div>
+            <h3>App Development</h3>
+            <div class="tl">
+              <span class="st">React Native</span
+              ><span class="st">Cross-Platform Apps</span
+              ><span class="st">iOS &amp; Android</span
+              ><span class="st">REST API Integration</span
+              ><span class="st">Push Notifications</span
+              ><span class="st">App UI/UX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WORK ═══ -->
+    <section id="work" class="section-work">
+      <div class="w">
+        <div class="bhead rv">
+          <div>
+            <span class="sl">Portfolio</span>
+            <h2>Live <em>Work</em></h2>
+          </div>
+          <span class="bcnt"
+            ><b>16</b> live stores across Shopify, WordPress &amp;
+            Full-Stack</span
+          >
+        </div>
+
+        <div class="btable rv">
+          <div class="bth">
+            <span>Brand / Project</span>
+            <span>Category</span>
+            <span>Stack</span>
+            <span>Link</span>
+          </div>
+
+          <a
+            class="br"
+            href="https://dhanishaandgehna.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-shirt"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Dhanisha &amp; Gehna <span class="vi">✦ Vogue</span>
+            </div>
+            <div class="bt-type">Luxury Fashion</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">Custom code</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://tsucchi.in/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fa-solid fa-vest"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Tsucchi
+            </div>
+            <div class="bt-type">D2C Fashion</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">Custom code</span><span class="btt">CRO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://nofearmode.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-shopping-bag"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Nofearmode
+            </div>
+            <div class="bt-type">D2C Streetwear</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">CRO</span><span class="btt">SEO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://sajilo.co/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fa-solid fa-person-dress"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Sajilo
+            </div>
+            <div class="bt-type">Lifestyle / D2C</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">CRO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://diavojewels.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-ring"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Diavo Jewels
+            </div>
+            <div class="bt-type">Jewellery</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">CRO</span><span class="btt">Custom code</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://dreamweaverzhome.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-couch"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Dreamweaverz Home
+            </div>
+            <div class="bt-type">Home Décor</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">CSS</span><span class="btt">Custom code</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://gentlyinsane.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-tshirt"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Gently Insane
+            </div>
+            <div class="bt-type">Fashion / D2C</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">JS</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a class="br" href="https://oskie.in/" target="_blank" rel="noopener">
+            <div class="bn">
+              <i
+                class="fa-solid fa-child-dress"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Oskie
+            </div>
+            <div class="bt-type">D2C / Retail</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">CRO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a class="br" href="https://paon.in/" target="_blank" rel="noopener">
+            <div class="bn">
+              <i
+                class="fas fa-tshirt"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Paon
+            </div>
+            <div class="bt-type">Handcrafted Fashion</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">Custom code</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://omizoo.in/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fa-solid fa-shoe-prints"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Omizoo
+            </div>
+            <div class="bt-type">Women's Shoes</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">CSS</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://quaclo.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-shirt"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Quaclo
+            </div>
+            <div class="bt-type">D2C / Apparel</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">JS</span><span class="btt">CSS</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://www.richaguptaofficial.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fa-solid fa-person-dress"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Richa Gupta Official
+            </div>
+            <div class="bt-type">Luxury Fashion</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">Custom code</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://tardetox.in/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fa-solid fa-smoking"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Tardetox
+            </div>
+            <div class="bt-type">Health care</div>
+            <div class="btags">
+              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
+              ><span class="btt">Custom code</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://alpineflow.co.in/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fa-solid fa-hotel"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >AlpineFlow
+            </div>
+            <div class="bt-type">Resort</div>
+            <div class="btags">
+              <span class="btt wp">Wordpress</span
+              ><span class="btt">Elementor</span><span class="btt">Html</span
+              ><span class="btt">CSS</span><span class="btt">JS</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://saarthitravels.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-bus"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >Saarthi Travels
+            </div>
+            <div class="bt-type">Travel &amp; Tourism</div>
+            <div class="btags">
+              <span class="btt wp">WordPress</span
+              ><span class="btt">Elementor</span><span class="btt">SEO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://thecreact.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-robot"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >CreAct
+            </div>
+            <div class="bt-type">EdTech / Robotics</div>
+            <div class="btags">
+              <span class="btt wp">WordPress</span
+              ><span class="btt">Elementor</span
+              ><span class="btt">WooCommerce</span><span class="btt">SEO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+
+          <a
+            class="br"
+            href="https://pahadipassport.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            <div class="bn">
+              <i
+                class="fas fa-route"
+                style="color: var(--gold); font-size: 0.8rem; width: 16px"
+              ></i
+              >PahadiPassport
+            </div>
+            <div class="bt-type">Travel &amp; Tours</div>
+            <div class="btags">
+              <span class="btt wp">WordPress</span
+              ><span class="btt">Elementor</span
+              ><span class="btt">WP Travel</span><span class="btt">SEO</span>
+            </div>
+            <div class="blink">
+              Visit
+              <i
+                class="fas fa-arrow-up-right-from-square"
+                style="font-size: 0.65rem"
+              ></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about" class="bg2">
+      <div class="w">
+        <div class="sh rv">
+          <span class="sl">About Me</span>
+          <h2>Building Digital <em>Excellence</em></h2>
+        </div>
+        <div class="ag">
+          <div class="alt rv">
+            <h3>From Idea to Live Store —<br />End to End</h3>
+            <p>
+              I'm a
+              <span class="hl">Shopify &amp; WordPress Developer</span>
+              currently working as Developer Executive at
+              <span class="hl">Uniqoemedia, Noida</span>. I manage the full
+              client lifecycle — requirement gathering, wireframing,
+              development, revisions, go-live, and post-launch CRO.
+            </p>
+            <p>
+              With <span class="hl">12+ live stores</span> delivered for D2C and
+              new-growth brands, I specialize in custom Shopify Liquid theming,
+              WordPress plugin development, and CRO strategies that measurably
+              reduce bounce rates and improve add-to-cart rates. My work on
+              <span class="hl">Dhanisha &amp; Gehna</span> earned a feature in
+              <span style="color: var(--gold); font-weight: 700">Vogue</span>.
+            </p>
+            <div class="edu">
+              <h4><i class="fas fa-graduation-cap"></i> Education</h4>
+              <p>
+                <strong>B.Tech — Computer Science &amp; Engineering</strong>
+              </p>
+              <p>THDC Institute of Hydropower Engineering &amp; Technology</p>
+              <p>
+                Uttarakhand Technical University &nbsp;·&nbsp; 2020–2024
+                &nbsp;·&nbsp; CGPA: 7.2/10
+              </p>
+              <p style="margin-top: 0.5rem; font-size: 0.8rem">
+                Relevant Courses: Data Structures, Web Development, Databases,
+                Software Engineering
+              </p>
+            </div>
+            <!-- <div class="cert">
+              <i class="fas fa-certificate"></i> NIELIT — Full Stack Development
+              &nbsp;·&nbsp; April 2025
+            </div> -->
+          </div>
+          <div class="rv">
+            <div class="el">
+              <div class="ec">
+                <div class="edate">April 2025 – Present</div>
+                <div class="etitle">
+                  Shopify &amp; WordPress Developer Executive
+                </div>
+                <div class="eco">Uniqoemedia &nbsp;·&nbsp; Noida, India</div>
+                <ul class="eul">
+                  <li>
+                    Built 12+ Shopify &amp; WordPress eCommerce stores from
+                    scratch for D2C &amp; new-growth brands
+                  </li>
+                  <li>
+                    Implemented CRO strategies — optimized CTAs, checkout flow
+                    &amp; page speed to lift conversions
+                  </li>
+                  <li>
+                    Customized storefronts using Liquid templating &amp;
+                    third-party app integrations
+                  </li>
+                  <li>
+                    Developed WordPress sites with custom themes, WooCommerce
+                    &amp; on-page SEO
+                  </li>
+                  <li>
+                    Integrated Razorpay, Shiprocket &amp; third-party APIs for
+                    secure checkout experiences
+                  </li>
+                </ul>
+              </div>
+              <div class="ec">
+                <div class="edate">August 2024 – February 2025</div>
+                <div class="etitle">Web Developer Intern</div>
+                <div class="eco">NIELIT &nbsp;·&nbsp; Haridwar, India</div>
+                <ul class="eul">
+                  <li>
+                    Designed and deployed cross-browser compatible UI using
+                    React.js
+                  </li>
+                  <li>
+                    Built scalable REST APIs with Node.js &amp; Express.js for
+                    secure access control
+                  </li>
+                  <li>
+                    Applied middleware optimization, reducing API latency by 25%
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="ec">
+                <div class="edate">Volunteer</div>
+                <div class="etitle">
+                  AI/ML Facilitator &amp; Job Fair Organizer
+                </div>
+                <div class="eco">NIELIT &nbsp;·&nbsp; Haridwar</div>
+                <ul class="eul">
+                  <li>Mentored 50+ students in Python and ML fundamentals</li>
+                  <li>
+                    Coordinated employer-candidate interactions for 300+
+                    attendees
+                  </li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact">
+      <div class="w">
+        <div class="cg">
+          <div class="ci rv">
+            <span class="sl">Get In Touch</span>
+            <h2>Let's Build<br /><em>Something Great</em></h2>
+            <p class="sd">
+              Open to freelance projects and eCommerce consulting. I'd love to
+              hear about your next build.
+            </p>
+            <div class="citems">
+              <div class="citem">
+                <div class="cico"><i class="fas fa-envelope"></i></div>
+                <div>
+                  <div class="clbl">Email</div>
+                  <div class="cval">
+                    <a href="mailto:mayankweb2026@gmail.com"
+                      >mayankweb2026@gmail.com</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="citem">
+                <div class="cico"><i class="fas fa-phone"></i></div>
+                <div>
+                  <div class="clbl">Phone</div>
+                  <div class="cval">
+                    <a href="tel:+917417518173">+91 74175 18173</a>
+                  </div>
+                </div>
+              </div>
+              <div class="citem">
+                <div class="cico"><i class="fas fa-location-dot"></i></div>
+                <div>
+                  <div class="clbl">Location</div>
+                  <div class="cval">Noida, India</div>
+                </div>
+              </div>
+            </div>
+            <div class="socs">
+              <!-- <a
+                href="https://www.linkedin.com/in/mayank-kumar-299503268/"
+                target="_blank"
+                class="soc"
+                title="LinkedIn"
+                ><i class="fab fa-linkedin-in"></i
+              ></a> -->
+              <!-- <a
+                href="https://github.com/Mayankkumar1612"
+                target="_blank"
+                class="soc"
+                title="GitHub"
+                ><i class="fab fa-github"></i
+              ></a> -->
+              <a href="mailto:mayankweb2026@gmail.com" class="soc" title="Email"
+                ><i class="fas fa-envelope"></i
+              ></a>
+              <!-- <a
+                href="https://www.instagram.com/its.mayankk16"
+                target="_blank"
+                class="soc"
+                title="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a> -->
+              <a
+                href="https://wa.me/919917518173"
+                target="_blank"
+                class="soc"
+                title="WhatsApp"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+          <div class="rv">
+            <div class="cpanel">
+              <div class="avail">
+                <div class="adot"></div>
+                <div class="atext">
+                  Currently available for freelance projects.
+                </div>
+              </div>
+              <div class="kgrid">
+                <div class="km">
+                  <span class="n">12+</span><span class="l">Live Stores</span>
+                </div>
+                <div class="km">
+                  <span class="n">1</span><span class="l">Vogue Feature</span>
+                </div>
+                <div class="km">
+                  <span class="n">25%</span><span class="l">API Latency ↓</span>
+                </div>
+                <div class="km">
+                  <span class="n">30%</span><span class="l">Speed Boost</span>
+                </div>
+              </div>
+              <a href="mailto:mayankweb2026@gmail.com" class="hbtn em"
+                ><i class="fas fa-paper-plane"></i> Send Me an Email</a
+              >
+              <a
+                href="https://wa.me/919917518173"
+                target="_blank"
+                class="hbtn wa"
+                ><i class="fab fa-whatsapp"></i> Message on WhatsApp</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        &copy; <span id="yr"></span>
+        <span>Mayank Web Solution</span> &nbsp;·&nbsp; Shopify · WordPress · App
+        Development &nbsp;·&nbsp; Noida, India
+      </p>
+    </footer>
+
+    <a
+      href="https://wa.me/919917518173"
+      class="fwa"
+      target="_blank"
+      title="WhatsApp"
+      ><i class="fab fa-whatsapp"></i
+    ></a>
+
+    <script>
+      document.getElementById("yr").textContent = new Date().getFullYear();
+
+      // nav scroll
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () =>
+        nav.classList.toggle("scrolled", scrollY > 50),
+      );
+
+      // hamburger
+      const hbg = document.getElementById("hbg"),
+        nl = document.getElementById("nl");
+      hbg.addEventListener("click", () => {
+        hbg.classList.toggle("op");
+        nl.classList.toggle("op");
+      });
+      nl.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          hbg.classList.remove("op");
+          nl.classList.remove("op");
+        }),
+      );
+
+      // scroll reveal
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+              setTimeout(() => e.target.classList.add("in"), i * 65);
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".rv").forEach((r) => obs.observe(r));
+
+      // hero entrance
+      document
+        .querySelectorAll(".hero > div > div:first-child > *")
+        .forEach((el, i) => {
+          el.style.cssText =
+            "opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease";
+          setTimeout(
+            () => (el.style.cssText = "opacity:1;transform:translateY(0)"),
+            160 + i * 110,
+          );
+        });
+    </script>
+  </body>
+</html>
