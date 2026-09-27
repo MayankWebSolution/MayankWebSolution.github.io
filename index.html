@@ -6,10 +6,10 @@
     <title>Mayank Web Solution — Shopify, WordPress & App Developer</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      href="https:cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https:fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -45,7 +45,6 @@
         line-height: 1.65;
       }
 
-      /* grain overlay */
       body::after {
         content: "";
         position: fixed;
@@ -53,11 +52,10 @@
         pointer-events: none;
         z-index: 9000;
         opacity: 0.4;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http:www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
         background-size: 128px;
       }
 
-      /* ambient light */
       .amb {
         position: fixed;
         inset: 0;
@@ -102,7 +100,6 @@
         }
       }
 
-      /* ── NAV ── */
       nav {
         position: fixed;
         top: 0;
@@ -188,7 +185,6 @@
         transform: rotate(-45deg) translate(5px, -5px);
       }
 
-      /* ── HERO ── */
       .hero {
         position: relative;
         z-index: 1;
@@ -329,7 +325,6 @@
         transform: translateY(-3px);
       }
 
-      /* hero card */
       .hcard {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -398,7 +393,6 @@
         color: var(--gold);
       }
 
-      /* ── SECTIONS ── */
       section {
         position: relative;
         z-index: 1;
@@ -443,7 +437,6 @@
         background: var(--ink2);
       }
 
-      /* ── SKILLS ── */
       .sgrid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
@@ -503,7 +496,6 @@
         color: var(--muted2);
       }
 
-      /* ── WORK / BRAND LIST ── */
       .section-work {
         background: var(--ink);
       }
@@ -524,7 +516,6 @@
         color: var(--gold);
       }
 
-      /* table */
       .btable {
         border: 1px solid var(--border);
         border-radius: 14px;
@@ -632,7 +623,6 @@
         color: var(--gold);
       }
 
-      /* personal projects */
       .pp {
         margin-top: 2.5rem;
       }
@@ -689,7 +679,6 @@
         color: var(--gold);
       }
 
-      /* ── ABOUT ── */
       .ag {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -826,7 +815,104 @@
         font-size: 0.8rem;
       }
 
-      /* ── CONTACT ── */
+      .enquiry-section {
+        background: var(--ink2);
+      }
+      .enquiry-wrap {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .enquiry-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 2rem;
+      }
+      .enquiry-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .efg {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }
+      .efg.full {
+        grid-column: 1 / -1;
+      }
+      .efg label {
+        font-size: 0.72rem;
+        color: var(--muted2);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      .efg input,
+      .efg select,
+      .efg textarea {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        outline: none;
+        border-radius: 9px;
+        padding: 0.9rem 1rem;
+        background: var(--ink2);
+        color: var(--text);
+        font: 400 0.86rem "Poppins", sans-serif;
+        transition: border-color 0.25s, box-shadow 0.25s;
+      }
+      .efg input::placeholder,
+      .efg textarea::placeholder {
+        color: var(--muted);
+      }
+      .efg input:focus,
+      .efg select:focus,
+      .efg textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+      }
+      .efg select option {
+        background: var(--ink2);
+        color: var(--text);
+      }
+      .efg textarea {
+        min-height: 135px;
+        resize: vertical;
+      }
+      .enquiry-submit {
+        margin-top: 1.15rem;
+        width: 100%;
+        justify-content: center;
+      }
+      .enquiry-status {
+        display: none;
+        margin-top: 0.85rem;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+      .enquiry-status.show {
+        display: block;
+      }
+      .enquiry-status.success {
+        color: #b8f0aa;
+        background: rgba(150, 229, 130, 0.08);
+        border: 1px solid rgba(150, 229, 130, 0.22);
+      }
+      .enquiry-status.error {
+        color: #ffb0b0;
+        background: rgba(255, 80, 80, 0.08);
+        border: 1px solid rgba(255, 80, 80, 0.22);
+      }
+      .hp-field {
+        position: absolute !important;
+        left: -9999px !important;
+        width: 1px !important;
+        height: 1px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
       .cg {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -1010,7 +1096,6 @@
         transform: translateY(-2px);
       }
 
-      /* ── FOOTER ── */
       footer {
         position: relative;
         z-index: 1;
@@ -1027,7 +1112,6 @@
         color: var(--gold);
       }
 
-      /* float wa */
       .fwa {
         position: fixed;
         bottom: 26px;
@@ -1051,7 +1135,6 @@
         box-shadow: 0 12px 34px rgba(37, 211, 102, 0.5);
       }
 
-      /* reveal */
       .rv {
         opacity: 0;
         transform: translateY(22px);
@@ -1064,7 +1147,6 @@
         transform: translateY(0);
       }
 
-      /* ── RESPONSIVE ── */
       @media (max-width: 1024px) {
         .hw,
         .ag,
@@ -1081,6 +1163,16 @@
         }
       }
       @media (max-width: 768px) {
+        .enquiry-grid {
+          grid-template-columns: 1fr;
+        }
+        .efg.full {
+          grid-column: auto;
+        }
+        .enquiry-card {
+          padding: 1.25rem;
+        }
+
         .hbg {
           display: flex;
         }
@@ -1158,7 +1250,6 @@
       <div class="a2"></div>
     </div>
 
-    <!-- NAV -->
     <nav id="nav">
       <div class="nw">
         <div class="logo">
@@ -1170,12 +1261,12 @@
           <li><a href="#skills">Skills</a></li>
           <li><a href="#work">Work</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#enquiry">Enquiry</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
     </nav>
 
-    <!-- ═══ HERO ═══ -->
     <section class="hero" id="home">
       <div class="hw">
         <div>
@@ -1246,15 +1337,13 @@
             >
               End-to-end client delivery — requirement gathering → wireframes →
               revisions → go-live → post-launch CRO. 
-              <!-- One brand featured in
-              <span style="color: var(--gold); font-weight: 700">Vogue</span>. -->
+              
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ SKILLS ═══ -->
     <section id="skills" class="bg2">
       <div class="w">
         <div class="sh rv">
@@ -1349,7 +1438,6 @@
       </div>
     </section>
 
-    <!-- ═══ WORK ═══ -->
     <section id="work" class="section-work">
       <div class="w">
         <div class="bhead rv">
@@ -1358,7 +1446,7 @@
             <h2>Live <em>Work</em></h2>
           </div>
           <span class="bcnt"
-            ><b>8</b> live stores across Shopify, WordPress &amp;
+            ><b>4</b> live stores across Shopify, WordPress &amp;
             Full-Stack</span
           >
         </div>
@@ -1371,350 +1459,21 @@
             <span>Link</span>
           </div>
 
-          <!-- <a
-            class="br"
-            href="https://dhanishaandgehna.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-shirt"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Dhanisha &amp; Gehna <span class="vi">✦ Vogue</span>
-            </div>
-            <div class="bt-type">Luxury Fashion</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">Custom code</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
+          
+
+          
+
+          
+
+          
+
+          
+
+          
 
           <a
             class="br"
-            href="https://tsucchi.in/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fa-solid fa-vest"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Tsucchi
-            </div>
-            <div class="bt-type">D2C Fashion</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">Custom code</span><span class="btt">CRO</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a>
-
-          <!-- <a
-            class="br"
-            href="https://nofearmode.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-shopping-bag"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Nofearmode
-            </div>
-            <div class="bt-type">D2C Streetwear</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">CRO</span><span class="btt">SEO</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <!-- <a
-            class="br"
-            href="https://sajilo.co/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fa-solid fa-person-dress"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Sajilo
-            </div>
-            <div class="bt-type">Lifestyle / D2C</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">CRO</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <!-- <a
-            class="br"
-            href="https://diavojewels.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-ring"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Diavo Jewels
-            </div>
-            <div class="bt-type">Jewellery</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">CRO</span><span class="btt">Custom code</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <!-- <a
-            class="br"
-            href="https://dreamweaverzhome.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-couch"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Dreamweaverz Home
-            </div>
-            <div class="bt-type">Home Décor</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">CSS</span><span class="btt">Custom code</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <!-- <a
-            class="br"
-            href="https://gentlyinsane.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-tshirt"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Gently Insane
-            </div>
-            <div class="bt-type">Fashion / D2C</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">JS</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <!-- <a class="br" href="https://oskie.in/" target="_blank" rel="noopener">
-            <div class="bn">
-              <i
-                class="fa-solid fa-child-dress"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Oskie
-            </div>
-            <div class="bt-type">D2C / Retail</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">CRO</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <a class="br" href="https://paon.in/" target="_blank" rel="noopener">
-            <div class="bn">
-              <i
-                class="fas fa-tshirt"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Paon
-            </div>
-            <div class="bt-type">Handcrafted Fashion</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">Custom code</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a>
-
-          <!-- <a
-            class="br"
-            href="https://omizoo.in/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fa-solid fa-shoe-prints"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Omizoo
-            </div>
-            <div class="bt-type">Women's Shoes</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">CSS</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <a
-            class="br"
-            href="https://quaclo.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-shirt"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Quaclo
-            </div>
-            <div class="bt-type">D2C / Apparel</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">JS</span><span class="btt">CSS</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a>
-
-          <a
-            class="br"
-            href="https://www.richaguptaofficial.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fa-solid fa-person-dress"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >Richa Gupta Official
-            </div>
-            <div class="bt-type">Luxury Fashion</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">Custom code</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a>
-
-          <!-- <a
-            class="br"
-            href="https://thecreact.com/"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="bn">
-              <i
-                class="fas fa-robot"
-                style="color: var(--gold); font-size: 0.8rem; width: 16px"
-              ></i
-              >CreAct
-            </div>
-            <div class="bt-type">EdTech / Robotics</div>
-            <div class="btags">
-              <span class="btt sp">Shopify</span><span class="btt">Liquid</span
-              ><span class="btt">Custom code</span>
-            </div>
-            <div class="blink">
-              Visit
-              <i
-                class="fas fa-arrow-up-right-from-square"
-                style="font-size: 0.65rem"
-              ></i>
-            </div>
-          </a> -->
-
-          <a
-            class="br"
-            href="https://tardetox.in/"
+            href="https:tardetox.in/"
             target="_blank"
             rel="noopener"
           >
@@ -1741,7 +1500,7 @@
 
           <a
             class="br"
-            href="https://alpineflow.co.in/"
+            href="https:alpineflow.co.in/"
             target="_blank"
             rel="noopener"
           >
@@ -1769,7 +1528,7 @@
 
           <a
             class="br"
-            href="https://saarthitravels.com/"
+            href="https:saarthitravels.com/"
             target="_blank"
             rel="noopener"
           >
@@ -1796,7 +1555,7 @@
 
           <a
             class="br"
-            href="https://pahadipassport.com/"
+            href="https:pahadipassport.com/"
             target="_blank"
             rel="noopener"
           >
@@ -1825,7 +1584,6 @@
       </div>
     </section>
 
-    <!-- ═══ ABOUT ═══ -->
     <section id="about" class="bg2">
       <div class="w">
         <div class="sh rv">
@@ -1846,9 +1604,7 @@
               new-growth brands, I specialize in custom Shopify Liquid theming,
               WordPress plugin development, and CRO strategies that measurably
               reduce bounce rates and improve add-to-cart rates.
-              <!-- My work on
-              <span class="hl">Dhanisha &amp; Gehna</span> earned a feature in
-              <span style="color: var(--gold); font-weight: 700">Vogue</span>. -->
+              
             </p>
             <div class="edu">
               <h4><i class="fas fa-graduation-cap"></i> Education</h4>
@@ -1865,10 +1621,7 @@
                 Software Engineering
               </p>
             </div>
-            <!-- <div class="cert">
-              <i class="fas fa-certificate"></i> NIELIT — Full Stack Development
-              &nbsp;·&nbsp; April 2025
-            </div> -->
+            
           </div>
           <div class="rv">
             <div class="el">
@@ -1919,27 +1672,99 @@
                   </li>
                 </ul>
               </div>
-              <!-- <div class="ec">
-                <div class="edate">Volunteer</div>
-                <div class="etitle">
-                  AI/ML Facilitator &amp; Job Fair Organizer
-                </div>
-                <div class="eco">NIELIT &nbsp;·&nbsp; Haridwar</div>
-                <ul class="eul">
-                  <li>Mentored 50+ students in Python and ML fundamentals</li>
-                  <li>
-                    Coordinated employer-candidate interactions for 300+
-                    attendees
-                  </li>
-                </ul>
-              </div> -->
+              
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ CONTACT ═══ -->
+    <section id="enquiry" class="enquiry-section">
+      <div class="w enquiry-wrap">
+        <div class="sh rv">
+          <span class="sl">Start a Project</span>
+          <h2>Send an <em>Enquiry</em></h2>
+          <p class="sd">
+            Tell me a little about your project and I’ll get back to you with the next steps.
+          </p>
+        </div>
+
+        <div class="enquiry-card rv">
+          <form id="enquiryForm" novalidate>
+            <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off">
+
+            <div class="enquiry-grid">
+              <div class="efg">
+                <label for="eqName">Full Name *</label>
+                <input id="eqName" name="name" type="text" placeholder="Your name" minlength="2" maxlength="80" required>
+              </div>
+
+              <div class="efg">
+                <label for="eqEmail">Email Address *</label>
+                <input id="eqEmail" name="email" type="email" placeholder="you@example.com" maxlength="120" required>
+              </div>
+
+              <div class="efg">
+                <label for="eqPhone">Phone / WhatsApp</label>
+                <input id="eqPhone" name="phone" type="tel" placeholder="+91 98765 43210" maxlength="20">
+              </div>
+
+              <div class="efg">
+                <label for="eqService">Service *</label>
+                <select id="eqService" name="service" required>
+                  <option value="" selected disabled>Select a service</option>
+                  <option value="Shopify Development">Shopify Development</option>
+                  <option value="WordPress / WooCommerce">WordPress / WooCommerce</option>
+                  <option value="Website Development">Website Development</option>
+                  <option value="Landing Page">Landing Page</option>
+                  <option value="App Development">App Development</option>
+                  <option value="Website Redesign">Website Redesign</option>
+                  <option value="CRO / SEO">CRO / SEO</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="efg">
+                <label for="enquiry-platform">Platform You Want *</label>
+                <select id="enquiry-platform" name="platform" required>
+                  <option value="" selected disabled>Select platform</option>
+                  <option value="Shopify">Shopify</option>
+                  <option value="WordPress">WordPress</option>
+                  <option value="Custom Code">Custom Code</option>
+                  <option value="React">React</option>
+                  <option value="MERN">MERN</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="efg">
+                <label for="eqBudget">Estimated Budget</label>
+                <select id="eqBudget" name="budget">
+                  <option value="" selected>Select budget range</option>
+                  <option value="Under ₹10,000">Under ₹10,000</option>
+                  <option value="₹10,000 – ₹25,000">₹10,000 – ₹25,000</option>
+                  <option value="₹25,000 – ₹50,000">₹25,000 – ₹50,000</option>
+                  <option value="₹50,000 – ₹1,00,000">₹50,000 – ₹1,00,000</option>
+                  <option value="₹1,00,000+">₹1,00,000+</option>
+                  <option value="Not decided yet">Not decided yet</option>
+                </select>
+              </div>
+
+              <div class="efg full">
+                <label for="eqMessage">Project Details *</label>
+                <textarea id="eqMessage" name="projectDetails" placeholder="Tell me about your website, store, app or project..." minlength="10" maxlength="3000" required></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn bp enquiry-submit" id="enquirySubmit">
+              <i class="fas fa-paper-plane"></i> Submit Enquiry
+            </button>
+            <div id="enquiryStatus" class="enquiry-status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section id="contact">
       <div class="w">
         <div class="cg">
@@ -1980,32 +1805,19 @@
               </div>
             </div>
             <div class="socs">
-              <!-- <a
-                href="https://www.linkedin.com/in/mayank-kumar-299503268/"
-                target="_blank"
-                class="soc"
-                title="LinkedIn"
-                ><i class="fab fa-linkedin-in"></i
-              ></a> -->
-              <!-- <a
-                href="https://github.com/Mayankkumar1612"
-                target="_blank"
-                class="soc"
-                title="GitHub"
-                ><i class="fab fa-github"></i
-              ></a> -->
+
               <a href="mailto:mayankweb2026@gmail.com" class="soc" title="Email"
                 ><i class="fas fa-envelope"></i
               ></a>
               <a
-                href="https://www.instagram.com/mayankwebsolution2026/"
+                href="https:www.instagram.com/mayankwebsolution2026/"
                 target="_blank"
                 class="soc"
                 title="Instagram"
                 ><i class="fab fa-instagram"></i
               ></a>
               <a
-                href="https://wa.me/919917518173"
+                href="https:wa.me/919917518173"
                 target="_blank"
                 class="soc"
                 title="WhatsApp"
@@ -2039,7 +1851,7 @@
                 ><i class="fas fa-paper-plane"></i> Send Me an Email</a
               >
               <a
-                href="https://wa.me/919917518173"
+                href="https:wa.me/919917518173"
                 target="_blank"
                 class="hbtn wa"
                 ><i class="fab fa-whatsapp"></i> Message on WhatsApp</a
@@ -2050,7 +1862,6 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
       <p>
         &copy; <span id="yr"></span>
@@ -2060,7 +1871,7 @@
     </footer>
 
     <a
-      href="https://wa.me/919917518173"
+      href="https:wa.me/919917518173"
       class="fwa"
       target="_blank"
       title="WhatsApp"
@@ -2069,14 +1880,10 @@
 
     <script>
       document.getElementById("yr").textContent = new Date().getFullYear();
-
-      // nav scroll
       const nav = document.getElementById("nav");
       window.addEventListener("scroll", () =>
         nav.classList.toggle("scrolled", scrollY > 50),
       );
-
-      // hamburger
       const hbg = document.getElementById("hbg"),
         nl = document.getElementById("nl");
       hbg.addEventListener("click", () => {
@@ -2089,8 +1896,6 @@
           nl.classList.remove("op");
         }),
       );
-
-      // scroll reveal
       const obs = new IntersectionObserver(
         (entries) => {
           entries.forEach((e, i) => {
@@ -2103,8 +1908,115 @@
         { threshold: 0.08 },
       );
       document.querySelectorAll(".rv").forEach((r) => obs.observe(r));
+      const enquiryForm = document.getElementById("enquiryForm");
+      const enquirySubmit = document.getElementById("enquirySubmit");
+      const enquiryStatus = document.getElementById("enquiryStatus");
+      const eqName = document.getElementById("eqName");
+      const eqEmail = document.getElementById("eqEmail");
+      const eqPhone = document.getElementById("eqPhone");
+      const eqService = document.getElementById("eqService");
+      const eqPlatform = document.getElementById("enquiry-platform");
+      const eqMessage = document.getElementById("eqMessage");
+      const ENQUIRY_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwVLDO00uaONdPWhifbpEbROHKM_mWYEsTTBc1yI2nPYoEAGapPgNiELY3vMvtDulkF/exec";
 
-      // hero entrance
+      function setEnquiryStatus(message, type) {
+        enquiryStatus.className = "enquiry-status show " + type;
+        enquiryStatus.textContent = message;
+      }
+
+      function validateEnquiryForm() {
+        const name = eqName.value.trim();
+        const email = eqEmail.value.trim();
+        const phone = eqPhone.value.trim();
+        const message = eqMessage.value.trim();
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phonePattern = /^[+]?[(]?[0-9]{1,4}[)]?[\s.-]?(?:[0-9]{3,5}[\s.-]?){2,4}$/;
+
+        if (name.length < 2) {
+          eqName.setCustomValidity("Please enter your full name.");
+          eqName.reportValidity();
+          eqName.setCustomValidity("");
+          return false;
+        }
+
+        if (!emailPattern.test(email)) {
+          eqEmail.setCustomValidity("Please enter a valid email address.");
+          eqEmail.reportValidity();
+          eqEmail.setCustomValidity("");
+          return false;
+        }
+
+        if (phone && !phonePattern.test(phone)) {
+          eqPhone.setCustomValidity("Please enter a valid phone or WhatsApp number.");
+          eqPhone.reportValidity();
+          eqPhone.setCustomValidity("");
+          return false;
+        }
+
+        if (!eqService.value) {
+          eqService.setCustomValidity("Please select a service.");
+          eqService.reportValidity();
+          eqService.setCustomValidity("");
+          return false;
+        }
+
+        if (!eqPlatform.value) {
+          eqPlatform.setCustomValidity("Please select the platform you want.");
+          eqPlatform.reportValidity();
+          eqPlatform.setCustomValidity("");
+          return false;
+        }
+
+        if (message.length < 10) {
+          eqMessage.setCustomValidity("Please enter at least 10 characters about your project.");
+          eqMessage.reportValidity();
+          eqMessage.setCustomValidity("");
+          return false;
+        }
+
+        return true;
+      }
+
+      enquiryForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        if (ENQUIRY_SCRIPT_URL.includes("PASTE_YOUR_")) {
+          setEnquiryStatus("Form backend is not connected yet. Please add the Google Apps Script Web App URL.", "error");
+          return;
+        }
+
+        const honeypot = enquiryForm.querySelector('input[name="website"]');
+        if (honeypot && honeypot.value.trim() !== "") {
+          return;
+        }
+
+        if (!validateEnquiryForm()) {
+          return;
+        }
+
+        const formData = new FormData(enquiryForm);
+        enquirySubmit.disabled = true;
+        enquirySubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        enquiryStatus.className = "enquiry-status";
+        enquiryStatus.textContent = "";
+
+        try {
+          await fetch(ENQUIRY_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: formData
+          });
+
+          enquiryForm.reset();
+          setEnquiryStatus("Thank you! Your enquiry has been submitted successfully. I’ll get back to you soon.", "success");
+        } catch (error) {
+          console.error("Enquiry submission error:", error);
+          setEnquiryStatus("Something went wrong. Please try again or contact me directly by email/WhatsApp.", "error");
+        } finally {
+          enquirySubmit.disabled = false;
+          enquirySubmit.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Enquiry';
+        }
+      });
       document
         .querySelectorAll(".hero > div > div:first-child > *")
         .forEach((el, i) => {
